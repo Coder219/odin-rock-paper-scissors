@@ -5,6 +5,11 @@ const gameLogic = {
     paper : {paper : 'tie', rock : 'human' , scissors : 'computer'},
     scissors : {paper : 'human', rock : 'computer' , scissors : 'tie'}
 };
+
+const rock_button = document.querySelector('.rock-button');
+const paper_button = document.querySelector('.paper-button');
+const scissors_button = document.querySelector('.scissors-button');
+
 let humanScore = 0;
 let computerScore = 0;
 let ties = 0;
