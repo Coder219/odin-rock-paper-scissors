@@ -20,7 +20,7 @@ function printScore(){
     console.log('Computer Score: '+computerScore);
     console.log('Human Score: '+ humanScore);
     console.log('Ties: '+ ties);
-    console.log('=====================')
+    console.log('===================')
 }
 function playRound(){
     let humanChoice = getHumanChoice();
