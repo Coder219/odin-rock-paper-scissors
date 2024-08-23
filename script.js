@@ -1,55 +1,81 @@
+let humanScore = 0;
+let computerScore = 0;
+let ties = 0;
+let in_round = false;
+let currentRound = 1;
 const choices = ['rock','paper','scissors'];
-const rounds = 5;
 const gameLogic = {
     rock : {paper : 'computer', rock : 'tie' , scissors : 'human'},
     paper : {paper : 'tie', rock : 'human' , scissors : 'computer'},
     scissors : {paper : 'human', rock : 'computer' , scissors : 'tie'}
 };
-
-const rock_button = document.querySelector('.rock-button');
-const paper_button = document.querySelector('.paper-button');
-const scissors_button = document.querySelector('.scissors-button');
-
-let humanScore = 0;
-let computerScore = 0;
-let ties = 0;
-function getHumanChoice(){
-    let humanChoice = prompt('Rock, paper, or scissors.').toLowerCase();
-    while (!choices.includes(humanChoice)) humanChoice = prompt('Not a valid responce. Please choose rock, paper, or scissors.').toLowerCase();
-    return humanChoice;
-}
+const choice_buttons = document.querySelectorAll('.choices');
+const results = document.querySelector('.results');
+const post_round_buttons = document.querySelector('.post-round-buttons');
+const round = document.querySelector('.round');
+const scoresElement = document.querySelector('.scores');
+updateRound();
+choice_buttons.forEach(button => {
+    button.onclick = ({ target }) => {
+        if (in_round == false) playRound(target.id, getComputerChoice());
+    };
+});
 function getComputerChoice(){
     return choices[Math.floor(Math.random() * 3)];
 }
-function printScore(){
-    console.log('Computer Score: '+computerScore);
-    console.log('Human Score: '+ humanScore);
-    console.log('Ties: '+ ties);
-    console.log('===================')
-}
-function playRound(){
-    let humanChoice = getHumanChoice();
-    let computerChoice = getComputerChoice();
-    let outcome = gameLogic[humanChoice][computerChoice];
+function determineOutcome(outcome){
     switch(outcome){
         case 'human':
-            console.log('Human Wins!');
             humanScore ++;
-            break;
+            return 'Human Wins!';
         case 'computer':
-            console.log('Computer Wins!');
             computerScore ++;
-            break;
+            return 'Computer Wins!';
         case 'tie':
-            console.log('Tie!');
             ties++;
-            break;
-    }
-    printScore();
-}
-function playGame(){
-    for (let round = 1; round <= rounds; round++){
-        playRound();
+            return 'Tie!';
     }
 }
-playGame();
+function displayChoices(humanChoice, computerChoice) {
+    const choicesHTML = `
+      <div>Human choice: ${humanChoice}</div>
+      <div>Computer choice: ${computerChoice}</div>
+    `;
+    results.innerHTML = choicesHTML;
+  }
+  function displayWinner(outcome){
+    const winnerElement = document.createElement('div');
+    winnerElement.textContent = "Winner: "+outcome;
+    results.appendChild(winnerElement);
+  }
+  function resetRound(){
+    results.querySelectorAll('*').forEach(node => node.remove());
+    in_round = false;
+    currentRound += 1;
+  }
+  function displayScore(humanScore,computerScore,ties){
+    const scoresHTML = `
+    <div>Human score: ${humanScore}</div>
+    <div>Computer score: ${computerScore}</div>
+    <div>Ties: ${ties}</div>
+    `;
+    scoresElement.innerHTML = scoresHTML;
+  }
+  function updateRound(){
+    round.textContent = `Current round: ${currentRound}`;
+  }
+function playRound(humanChoice,computerChoice){
+    in_round = true;
+    let outcome = gameLogic[humanChoice][computerChoice];
+    displayChoices(humanChoice,computerChoice);
+    displayWinner(determineOutcome(outcome));
+    displayScore(humanScore,computerScore,ties);
+    const continue_button = document.createElement("button");
+    continue_button.textContent = 'Next Round';
+    results.appendChild(continue_button);
+    continue_button.onclick = () => {
+        resetRound();
+        updateRound();
+    }
+}
+

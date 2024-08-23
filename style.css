@@ -1,0 +1,36 @@
+html {
+    background-color: lightblue;
+    color: white;
+    text-align: center;
+    font-size: 21px;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.choices {
+    display:flex;
+    gap: 50px;
+    justify-content: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+.choices button {
+    padding: 50px;
+    background-color: cornflowerblue;
+    border-radius: 5px;
+    border: 5px solid white;
+    color: white;
+    font-weight: 900;
+    font-size: 25px;
+}
+
+.round {
+    text-align: center;
+    font-size: 21px;
+}
+
