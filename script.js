@@ -70,10 +70,11 @@ function playRound(humanChoice,computerChoice){
     displayChoices(humanChoice,computerChoice);
     displayWinner(determineOutcome(outcome));
     displayScore(humanScore,computerScore,ties);
-    const continue_button = document.createElement("button");
-    continue_button.textContent = 'Next Round';
-    results.appendChild(continue_button);
-    continue_button.onclick = () => {
+    const continueButton = document.createElement("button");
+    continueButton.classList.add('blue');
+    continueButton.textContent = 'Next Round';
+    results.appendChild(continueButton);
+    continueButton.onclick = () => {
         resetRound();
         updateRound();
     }

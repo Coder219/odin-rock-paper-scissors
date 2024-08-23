@@ -1,6 +1,6 @@
 html {
-    background-color: lightblue;
-    color: white;
+    background-color: white;
+    color: cornflowerblue;
     text-align: center;
     font-size: 21px;
 }
@@ -19,11 +19,11 @@ h1 {
     text-align: center;
 }
 
-.choices button {
-    padding: 50px;
+.blue {
+    padding: 25px;
     background-color: cornflowerblue;
     border-radius: 5px;
-    border: 5px solid white;
+    border: 5px solid cornflowerblue;
     color: white;
     font-weight: 900;
     font-size: 25px;
@@ -32,5 +32,9 @@ h1 {
 .round {
     text-align: center;
     font-size: 21px;
+}
+
+.results button{
+    margin-top: 25px;
 }
 
