@@ -11,7 +11,6 @@ const gameLogic = {
 };
 const choice_buttons = document.querySelectorAll('.choices');
 const results = document.querySelector('.results');
-const post_round_buttons = document.querySelector('.post-round-buttons');
 const round = document.querySelector('.round');
 const scoresElement = document.querySelector('.scores');
 updateRound();
