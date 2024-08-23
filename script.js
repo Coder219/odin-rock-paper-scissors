@@ -15,6 +15,7 @@ const post_round_buttons = document.querySelector('.post-round-buttons');
 const round = document.querySelector('.round');
 const scoresElement = document.querySelector('.scores');
 updateRound();
+displayScore(humanScore,computerScore,ties);
 choice_buttons.forEach(button => {
     button.onclick = ({ target }) => {
         if (in_round == false) playRound(target.id, getComputerChoice());
@@ -43,17 +44,16 @@ function displayChoices(humanChoice, computerChoice) {
     `;
     results.innerHTML = choicesHTML;
   }
-  function displayWinner(outcome){
+function displayWinner(outcome){
     const winnerElement = document.createElement('div');
     winnerElement.textContent = "Winner: "+outcome;
     results.appendChild(winnerElement);
   }
-  function resetRound(){
-    results.querySelectorAll('*').forEach(node => node.remove());
+function resetRound(){
     in_round = false;
     currentRound += 1;
   }
-  function displayScore(humanScore,computerScore,ties){
+function displayScore(humanScore,computerScore,ties){
     const scoresHTML = `
     <div>Human score: ${humanScore}</div>
     <div>Computer score: ${computerScore}</div>
@@ -61,7 +61,7 @@ function displayChoices(humanChoice, computerChoice) {
     `;
     scoresElement.innerHTML = scoresHTML;
   }
-  function updateRound(){
+function updateRound(){
     round.textContent = `Current round: ${currentRound}`;
   }
 function playRound(humanChoice,computerChoice){
@@ -70,13 +70,7 @@ function playRound(humanChoice,computerChoice){
     displayChoices(humanChoice,computerChoice);
     displayWinner(determineOutcome(outcome));
     displayScore(humanScore,computerScore,ties);
-    const continueButton = document.createElement("button");
-    continueButton.classList.add('blue');
-    continueButton.textContent = 'Next Round';
-    results.appendChild(continueButton);
-    continueButton.onclick = () => {
-        resetRound();
-        updateRound();
-    }
+    resetRound();
+    updateRound();
 }
 
